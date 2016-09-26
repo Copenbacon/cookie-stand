@@ -8,7 +8,7 @@
 
 //<ul id = locationName></ul> document.getElementById()
 
-var storeHours = ['6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM',];
+var storeHours = ['6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM'];
 
 var firstAndPike = {
   //Properties
@@ -23,25 +23,29 @@ var firstAndPike = {
 
   //Methods
   randCustPerHourGen : function(minCustPerHour, maxCustPerHour) {
-    this.minCustPerHour = Math.ceil(this.minCustPerHour);
-    this.maxCustPerHour = Math.floor(this.maxCustPerHour);
-    return Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
+    for (var i = 0; i < storeHours.length; i++){
+      console.log(i);
+      this.minCustPerHour = Math.ceil(this.minCustPerHour);
+      this.maxCustPerHour = Math.floor(this.maxCustPerHour);
+      this.randCustPerHour[i] = Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
+      console.log(this.randCustPerHour[i]);
+    }
   }
-  //
-  // calculateAndStoreCookiesPurchasedEachHour : function() {
-  //
-  // }
-  //
-  // resultsGenerator : function() {
-  //   // avgCookiesPerSale*randCustPerHour
-  //   //stored with storeHours[i];
-  // }
-  //
-  // totalDailySalesMethod : function() {
-  //
-  // }
-  //
-  // render : function() {
-  //
-  // }
+
+  totalCookiesSoldPerHourMethod : function() {
+    for (var i = 0, i < storeHours.length, i++){
+      avgCookiesPerSale * randCustPerHour[i];
+    }
+  }
+//
+//   totalDailySalesMethod : function() {
+//
+//   }
+//
+//   render : function() {
+//
+//   }
 };
+
+firstAndPike.randCustPerHourGen();
+console.log(firstAndPike.randCustPerHour);
