@@ -18,34 +18,39 @@ var firstAndPike = {
   avgCookiesPerSale : 6.3,
   randCustPerHour : [],
   results : [],
-  totalCookiesSoldPerHour : null ,
+  totalCookiesSoldPerHour : [] ,
   totalDailySales : null,
 
   //Methods
   randCustPerHourGen : function(minCustPerHour, maxCustPerHour) {
     for (var i = 0; i < storeHours.length; i++){
-      console.log(i);
+      // is for loop running?
+      // console.log(i);
       this.minCustPerHour = Math.ceil(this.minCustPerHour);
       this.maxCustPerHour = Math.floor(this.maxCustPerHour);
       this.randCustPerHour[i] = Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
       console.log(this.randCustPerHour[i]);
     }
-  }
+  },
 
   totalCookiesSoldPerHourMethod : function() {
-    for (var i = 0, i < storeHours.length, i++){
-      avgCookiesPerSale * randCustPerHour[i];
+    this.randCustPerHourGen();
+    for (var i = 0; i < storeHours.length; i++){
+      this.totalCookiesSoldPerHour[i] = this.avgCookiesPerSale * this.randCustPerHour[i];
+      console.log(this.totalCookiesSoldPerHour[i]);
     }
-  }
-//
-//   totalDailySalesMethod : function() {
-//
-//   }
-//
-//   render : function() {
-//
-//   }
-};
+  },
 
-firstAndPike.randCustPerHourGen();
-console.log(firstAndPike.randCustPerHour);
+  totalDailySalesMethod : function() {
+    this.totalCookiesSoldPerHourMethod();
+    for (var i = 0; i < this.totalCookiesSoldPerHour.length; i++){
+      this.totalDailySales += Math.ceil(this.totalCookiesSoldPerHour[i]) ;
+      console.log(this.totalDailySales);
+    }
+  },
+
+  render : function() {
+    this.totalDailySalesMethod();
+    
+  }
+};
