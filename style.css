@@ -1,0 +1,30 @@
+* {
+
+}
+
+html body {
+  background-color: rgba(219, 96, 50, 0.4);
+  text-align: center;
+}
+
+h1 {
+  font-family: serif;
+  color: rgb(232, 42, 12);
+  text-decoration: underline;
+}
+
+ul {
+  margin:auto;
+  padding: 1%;
+  background-color: rgba(219, 96, 50, .9);
+  width: 20%;
+  border-radius: 2%;
+  list-style-type: none;
+  font-weight: bold;
+
+}
+
+li {
+  font-family: sans-serif;
+  color: rgb(12, 14, 232);
+}

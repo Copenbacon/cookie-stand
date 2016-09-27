@@ -8,7 +8,7 @@
 
 //<ul id = locationName></ul> document.getElementById()
 
-var storeHours = ['6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM'];
+var storeHours = ['6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM'];
 
 var firstAndPike = {
   //Properties
@@ -24,14 +24,12 @@ var firstAndPike = {
   totalDailySales : null,
 
   //Methods
-  randCustPerHourGen : function(minCustPerHour, maxCustPerHour) {
+  randCustPerHourGen : function() {
     for (var i = 0; i < storeHours.length; i++){
       // is for loop running?
       // console.log(i);
-      this.minCustPerHour = Math.ceil(this.minCustPerHour);
-      this.maxCustPerHour = Math.floor(this.maxCustPerHour);
       this.randCustPerHour[i] = Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
-      console.log(this.randCustPerHour[i]);
+      console.log('Random Customers Per Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.randCustPerHour[i]);
     }
   },
 
@@ -39,7 +37,7 @@ var firstAndPike = {
     this.randCustPerHourGen();
     for (var i = 0; i < storeHours.length; i++){
       this.totalCookiesSoldPerHour[i] = this.avgCookiesPerSale * this.randCustPerHour[i];
-      console.log(this.totalCookiesSoldPerHour[i]);
+      console.log('Total Cookies Sold Each Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.totalCookiesSoldPerHour[i]);
     }
   },
 
@@ -48,8 +46,8 @@ var firstAndPike = {
     for (var i = 0; i < this.totalCookiesSoldPerHour.length; i++){
       this.totalCookiesSoldPerHour[i] = Math.ceil(this.totalCookiesSoldPerHour[i]);
       this.totalDailySales += this.totalCookiesSoldPerHour[i] ;
-      console.log(this.totalDailySales);
     }
+    console.log('Total Cookies Sold Today at ' + this.locationName + ': ' + this.totalDailySales);
   },
 
   render : function() {
@@ -83,14 +81,12 @@ var seaTacAirport = {
   totalDailySales : null,
 
   //Methods
-  randCustPerHourGen : function(minCustPerHour, maxCustPerHour) {
+  randCustPerHourGen : function() {
     for (var i = 0; i < storeHours.length; i++){
       // is for loop running?
       // console.log(i);
-      this.minCustPerHour = Math.ceil(this.minCustPerHour);
-      this.maxCustPerHour = Math.floor(this.maxCustPerHour);
       this.randCustPerHour[i] = Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
-      console.log(this.randCustPerHour[i]);
+      console.log('Random Customers Per Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.randCustPerHour[i]);
     }
   },
 
@@ -98,7 +94,7 @@ var seaTacAirport = {
     this.randCustPerHourGen();
     for (var i = 0; i < storeHours.length; i++){
       this.totalCookiesSoldPerHour[i] = this.avgCookiesPerSale * this.randCustPerHour[i];
-      console.log(this.totalCookiesSoldPerHour[i]);
+      console.log('Total Cookies Sold Each Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.totalCookiesSoldPerHour[i]);
     }
   },
 
@@ -106,9 +102,9 @@ var seaTacAirport = {
     this.totalCookiesSoldPerHourMethod();
     for (var i = 0; i < this.totalCookiesSoldPerHour.length; i++){
       this.totalCookiesSoldPerHour[i] = Math.ceil(this.totalCookiesSoldPerHour[i]);
-      this.totalDailySales += this.totalCookiesSoldPerHour[i] ;
-      console.log(this.totalDailySales);
+      this.totalDailySales += this.totalCookiesSoldPerHour[i];
     }
+    console.log('Total Cookies Sold Today at ' + this.locationName + ': ' + this.totalDailySales);
   },
 
   render : function() {
@@ -142,14 +138,12 @@ var seattleCenter = {
   totalDailySales : null,
 
   //Methods
-  randCustPerHourGen : function(minCustPerHour, maxCustPerHour) {
+  randCustPerHourGen : function() {
     for (var i = 0; i < storeHours.length; i++){
       // is for loop running?
       // console.log(i);
-      this.minCustPerHour = Math.ceil(this.minCustPerHour);
-      this.maxCustPerHour = Math.floor(this.maxCustPerHour);
       this.randCustPerHour[i] = Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
-      console.log(this.randCustPerHour[i]);
+      console.log('Random Customers Per Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.randCustPerHour[i]);
     }
   },
 
@@ -157,7 +151,7 @@ var seattleCenter = {
     this.randCustPerHourGen();
     for (var i = 0; i < storeHours.length; i++){
       this.totalCookiesSoldPerHour[i] = this.avgCookiesPerSale * this.randCustPerHour[i];
-      console.log(this.totalCookiesSoldPerHour[i]);
+      console.log('Total Cookies Sold Each Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.totalCookiesSoldPerHour[i]);
     }
   },
 
@@ -166,8 +160,8 @@ var seattleCenter = {
     for (var i = 0; i < this.totalCookiesSoldPerHour.length; i++){
       this.totalCookiesSoldPerHour[i] = Math.ceil(this.totalCookiesSoldPerHour[i]);
       this.totalDailySales += this.totalCookiesSoldPerHour[i] ;
-      console.log(this.totalDailySales);
     }
+    console.log('Total Cookies Sold Today at ' + this.locationName + ': ' + this.totalDailySales);
   },
 
   render : function() {
@@ -201,14 +195,12 @@ var capHill = {
   totalDailySales : null,
 
   //Methods
-  randCustPerHourGen : function(minCustPerHour, maxCustPerHour) {
+  randCustPerHourGen : function() {
     for (var i = 0; i < storeHours.length; i++){
       // is for loop running?
       // console.log(i);
-      this.minCustPerHour = Math.ceil(this.minCustPerHour);
-      this.maxCustPerHour = Math.floor(this.maxCustPerHour);
       this.randCustPerHour[i] = Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
-      console.log(this.randCustPerHour[i]);
+      console.log('Random Customers Per Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.randCustPerHour[i]);
     }
   },
 
@@ -216,7 +208,7 @@ var capHill = {
     this.randCustPerHourGen();
     for (var i = 0; i < storeHours.length; i++){
       this.totalCookiesSoldPerHour[i] = this.avgCookiesPerSale * this.randCustPerHour[i];
-      console.log(this.totalCookiesSoldPerHour[i]);
+      console.log('Total Cookies Sold Each Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.totalCookiesSoldPerHour[i]);
     }
   },
 
@@ -225,8 +217,8 @@ var capHill = {
     for (var i = 0; i < this.totalCookiesSoldPerHour.length; i++){
       this.totalCookiesSoldPerHour[i] = Math.ceil(this.totalCookiesSoldPerHour[i]);
       this.totalDailySales += this.totalCookiesSoldPerHour[i] ;
-      console.log(this.totalDailySales);
     }
+    console.log('Total Cookies Sold Today at ' + this.locationName + ': ' + this.totalDailySales);
   },
 
   render : function() {
@@ -260,14 +252,12 @@ var alki = {
   totalDailySales : null,
 
   //Methods
-  randCustPerHourGen : function(minCustPerHour, maxCustPerHour) {
+  randCustPerHourGen : function() {
     for (var i = 0; i < storeHours.length; i++){
       // is for loop running?
       // console.log(i);
-      this.minCustPerHour = Math.ceil(this.minCustPerHour);
-      this.maxCustPerHour = Math.floor(this.maxCustPerHour);
       this.randCustPerHour[i] = Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1)) + this.minCustPerHour;
-      console.log(this.randCustPerHour[i]);
+      console.log('Random Customers Per Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.randCustPerHour[i]);
     }
   },
 
@@ -275,7 +265,7 @@ var alki = {
     this.randCustPerHourGen();
     for (var i = 0; i < storeHours.length; i++){
       this.totalCookiesSoldPerHour[i] = this.avgCookiesPerSale * this.randCustPerHour[i];
-      console.log(this.totalCookiesSoldPerHour[i]);
+      console.log('Total Cookies Sold Each Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.totalCookiesSoldPerHour[i]);
     }
   },
 
@@ -284,8 +274,8 @@ var alki = {
     for (var i = 0; i < this.totalCookiesSoldPerHour.length; i++){
       this.totalCookiesSoldPerHour[i] = Math.ceil(this.totalCookiesSoldPerHour[i]);
       this.totalDailySales += this.totalCookiesSoldPerHour[i] ;
-      console.log(this.totalDailySales);
     }
+    console.log('Total Cookies Sold Today at ' + this.locationName + ': ' + this.totalDailySales);
   },
 
   render : function() {
