@@ -3,9 +3,7 @@
 var storeHours = ['6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM'];
 var allStoresArray = [];
 var tableIdEl = document.getElementById('salmon-cookies');
-var headerRow = document.createElement('th');
-headerRow.textContent = ' ';
-tableIdEl.appendChild(headerRow);
+
 
 function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale){
   this.storeHours = storeHours;
@@ -50,34 +48,21 @@ function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale){
   this.render = function() {
     this.totalDailySalesMethod();
     var trEl = document.createElement('tr');
-    trEl.textContent = this.locationName;
+    trEl.textContent = '';
     tableIdEl.appendChild(trEl);
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.locationName;
+    trEl.appendChild(tdEl);
+    tdEl.setAttribute('class', 'location-name');
 
     for(var i = 0; i < this.totalCookiesRow.length; i++){
-      var tdEl = document.createElement('td');
+      tdEl = document.createElement('td');
       tdEl.textContent = this.totalCookiesRow[i];
       trEl.appendChild(tdEl);
     };
   };
   allStoresArray.push(this);
 }
-
-for (var i = 0; i < storeHours.length; i++){
-  var headerRowTwo = document.createElement('th');
-  headerRowTwo.textContent = storeHours[i];
-  tableIdEl.appendChild(headerRowTwo);
-};
-var headerRowTwo = document.createElement('th');
-headerRowTwo.textContent = 'Total';
-tableIdEl.appendChild(headerRowTwo);
-
-var firstAndPike = new Store('1st and Pike', 23, 65, 6.3); //eslint-disable-line
-var seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2); //eslint-disable-line
-var seattleCenter = new Store('Seattle Center', 11, 38, 3.7); //eslint-disable-line
-var capHill = new Store('Capitol Hill', 20, 38, 2.3); //eslint-disable-line
-var alki = new Store('Alki', 2, 16, 4.6); //eslint-disable-line
-
-
 
 function AllStoresObj(locationName) { //eslint-disable-line
   this.locationName = locationName;
@@ -94,25 +79,51 @@ function AllStoresObj(locationName) { //eslint-disable-line
   this.totalHourlyCookies = [];
   this.totalHourlyCookieSales = function(){
     var trEl = document.createElement('tr');
-    trEl.textContent = 'Totals';
+    trEl.textContent = '';
     tableIdEl.appendChild(trEl);
+    var tdEl = document.createElement('td');
+    tdEl.textContent = 'Totals';
+    trEl.appendChild(tdEl);
+    tdEl.setAttribute('class', 'total-class');
     for(var i = 0; i < storeHours.length; i++){
       var hourlyCookies = 0;
       for(var j = 0; j < allStoresArray.length; j++){
         hourlyCookies += allStoresArray[j].totalCookiesSoldPerHour[i];
       };
       this.totalHourlyCookies.push(hourlyCookies);
-      var tdEl = document.createElement('td');
+      tdEl = document.createElement('td');
       tdEl.textContent = hourlyCookies;
       trEl.appendChild(tdEl);
+      tdEl.setAttribute('class', 'hourly-cookies');
     };
-    var tdEl = document.createElement('td');
+    tdEl = document.createElement('td');
     tdEl.textContent = this.totalDailySales;
     trEl.appendChild(tdEl);
+    tdEl.setAttribute('class', 'total-cookies');
   };
 }
 
+function createHeaderRow(){
+  var headerRow = document.createElement('th');
+  headerRow.textContent = ' ';
+  tableIdEl.appendChild(headerRow);
+  for (var i = 0; i < storeHours.length; i++){
+    headerRow = document.createElement('th');
+    headerRow.textContent = storeHours[i];
+    tableIdEl.appendChild(headerRow);
+  };
+  headerRow = document.createElement('th');
+  headerRow.textContent = 'Total';
+  tableIdEl.appendChild(headerRow);
+}
 
+
+var firstAndPike = new Store('1st and Pike', 23, 65, 6.3); //eslint-disable-line
+var seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2); //eslint-disable-line
+var seattleCenter = new Store('Seattle Center', 11, 38, 3.7); //eslint-disable-line
+var capHill = new Store('Capitol Hill', 20, 38, 2.3); //eslint-disable-line
+var alki = new Store('Alki', 2, 16, 4.6); //eslint-disable-line
 var allStores = new AllStoresObj('All Stores');
+createHeaderRow();
 allStores.totalDailySalesRender();
 allStores.totalHourlyCookieSales();
