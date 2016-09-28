@@ -9,6 +9,29 @@
     <h1>Sales Projections Domain Model for Pat's Salmon Cookie Stands</h1>
     <table id = "salmon-cookies">
     </table>
+
+    <form id="salmon-cookies-input">
+      <fieldset>
+        <legend>Enter your store information here</legend>
+
+        <label for="storeName">Store Name: </label>
+        <input name="storeName" type="text" />
+
+        <label for="minCustPerHour">Minimum Customers Per Hour: </label>
+        <input name="minCustPerHour" type="text" size="8"/>
+
+        <label for="maxCustPerHour">Maximum Customers Per Hour: </label>
+        <input name="maxCustPerHour" type="text" size="8"/>
+
+        <label for="avgCookiesPerSale">Average Cookies Per Sale: </label>
+        <input name="avgCookiesPerSale" type="text" size="8" />
+      </br>
+        <button type="submit"> Submit Data </button>
+      </fieldset>
+    </form>
+
+    <button id="totals-calculation" type="submit"> Calculate Totals </button>
+
     <script src="app.js"></script>
   </body>
 </html>
