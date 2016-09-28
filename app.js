@@ -3,18 +3,21 @@
 var storeHours = ['6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM'];
 var allStoresArray = [];
 var salmonCookiesInput = document.getElementById('salmon-cookies-input');
+var totalsCalcInput = document.getElementById('totals-calculation');
 var tableIdEl = document.getElementById('salmon-cookies');
 var totalHourlyCookies = [];
 var totalDailySales = null;
-// var firstAndPike = new Store('1st and Pike', 23, 65, 6.3); //eslint-disable-line
-// var seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2); //eslint-disable-line
-// var seattleCenter = new Store('Seattle Center', 11, 38, 3.7); //eslint-disable-line
-// var capHill = new Store('Capitol Hill', 20, 38, 2.3); //eslint-disable-line
-// var alki = new Store('Alki', 2, 16, 4.6); //eslint-disable-line
+var firstAndPike = new Store('1st and Pike', 23, 65, 6.3); //eslint-disable-line
+var seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2); //eslint-disable-line
+var seattleCenter = new Store('Seattle Center', 11, 38, 3.7); //eslint-disable-line
+var capHill = new Store('Capitol Hill', 20, 38, 2.3); //eslint-disable-line
+var alki = new Store('Alki', 2, 16, 4.6); //eslint-disable-line
 var locationName = document.getElementById('storeName'); //eslint-disable-line
 var minCustPerHour = document.getElementById('minCustPerHour'); //eslint-disable-line
 var maxCustPerHour = document.getElementById('maxCustPerHour'); //eslint-disable-line
 var avgCookiesPerSale = document.getElementById('avgCookiesPerSale'); //eslint-disable-line
+
+
 
 var totalDailySalesCalc = function(){ //eslint-disable-line
   totalDailySales = 0;
@@ -89,8 +92,9 @@ function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale){
     console.log('Total Cookies Sold Today at ' + this.locationName + ': ' + this.totalDailySales);
   };
 
+  this.totalDailySalesMethod();
+
   this.render = function() {
-    this.totalDailySalesMethod();
     var trEl = document.createElement('tr');
     trEl.textContent = '';
     tableIdEl.appendChild(trEl);
@@ -126,22 +130,51 @@ function createHeaderRow(){
 
 function handleStoreSubmit(event){
   event.preventDefault();
+
+  if(!event.target.storeName.value || !event.target.minCustPerHour.value || !event.target.maxCustPerHour.value || !event.target.avgCookiesPerSale.value){
+    return alert('Do not leave fields empty!');
+  };
+
+  // if (event.target.storeName.value !== string){
+  //   return alert('Please enter a name with letters');
+  // }
+
   locationName = event.target.storeName.value;
-  minCustPerHour = event.target.minCustPerHour.value;
-  maxCustPerHour = event.target.maxCustPerHour.value;
-  avgCookiesPerSale = event.target.avgCookiesPerSale.value;
+  minCustPerHour = parseInt(event.target.minCustPerHour.value);
+  maxCustPerHour = parseInt(event.target.maxCustPerHour.value);
+  avgCookiesPerSale = parseFloat(event.target.avgCookiesPerSale.value);
+  console.log(avgCookiesPerSale);
+
   console.log('this event is happening' + event);
   var handleStore = new Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale);
-  handleStore.render();
   event.target.storeName.value = null;
   event.target.minCustPerHour.value = null;
   event.target.maxCustPerHour.value = null;
   event.target.avgCookiesPerSale.value = null;
+  tableIdEl.textContent = null;
+
+  createHeaderRow();
+  for (var i = 0; i < allStoresArray.length; i++){
+    allStoresArray[i].render();
+  }
+  totalDailySalesCalc();
+  totalHourlyCookieSales();
+
 }
 
-// Event listener for comment submission form
-salmonCookiesInput.addEventListener('submit', handleStoreSubmit);
+// function handleTotalsCalc(event){
+//   event.preventDefault();
+//   console.log('runnin?');
+// }
 
 createHeaderRow();
-// allStores.totalDailySalesRender();
-// allStores.totalHourlyCookieSales();
+for (var i = 0; i < allStoresArray.length; i++){
+  allStoresArray[i].render();
+}
+
+// Event listener for Store Variables Input
+salmonCookiesInput.addEventListener('submit', handleStoreSubmit);
+
+
+// Event listener for Calculate Totals Button
+// totalsCalcInput.addEventListener('submit', handleTotalsCalc);
