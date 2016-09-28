@@ -49,6 +49,15 @@ function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale){
 
   this.render = function() {
     this.totalDailySalesMethod();
+    var trEl = document.createElement('tr');
+    trEl.textContent = this.locationName;
+    tableIdEl.appendChild(trEl);
+
+    for(var i = 0; i < this.totalCookiesRow.length; i++){
+      var tdEl = document.createElement('td');
+      tdEl.textContent = this.totalCookiesRow[i];
+      trEl.appendChild(tdEl);
+    };
   };
   allStoresArray.push(this);
 }
@@ -80,31 +89,30 @@ function AllStoresObj(locationName) { //eslint-disable-line
       allStoresArray[i].render();
       this.totalDailySales += allStoresArray[i].totalDailySales;
     };
+  };
 
-
-    // var tdEl = document.createElement('td');
-    // tdEl.textContent = this.totalDailySales;
-    // this.trIdEl.appendChild(tdEl);
-    // var h1El = document.createElement('tr');
-    // h1El.textContent = this.locationName;
-    // this.bodyIdEl.appendChild(this.ulIdEl);
-    // var liEl = document.createElement('td');
-    // liEl.textContent = this.totalDailySales + ' cookies sold at ' + this.locationName + ' today!';
-    // this.ulIdEl.appendChild(liEl);
+  this.totalHourlyCookies = [];
+  this.totalHourlyCookieSales = function(){
+    var trEl = document.createElement('tr');
+    trEl.textContent = 'Totals';
+    tableIdEl.appendChild(trEl);
+    for(var i = 0; i < storeHours.length; i++){
+      var hourlyCookies = 0;
+      for(var j = 0; j < allStoresArray.length; j++){
+        hourlyCookies += allStoresArray[j].totalCookiesSoldPerHour[i];
+      };
+      this.totalHourlyCookies.push(hourlyCookies);
+      var tdEl = document.createElement('td');
+      tdEl.textContent = hourlyCookies;
+      trEl.appendChild(tdEl);
+    };
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.totalDailySales;
+    trEl.appendChild(tdEl);
   };
 }
 
 
 var allStores = new AllStoresObj('All Stores');
 allStores.totalDailySalesRender();
-
-for(var i = 0; i < allStoresArray.length; i++){
-  var trEl = document.createElement('tr');
-  trEl.textContent = allStoresArray[i].locationName;
-  tableIdEl.appendChild(trEl);
-  for(var j = 0; j < storeHours.length + 1; j++){
-    var tdEl = document.createElement('td');
-    tdEl.textContent = allStoresArray[i].totalCookiesRow[j];
-    trEl.appendChild(tdEl);
-  };
-};
+allStores.totalHourlyCookieSales();
