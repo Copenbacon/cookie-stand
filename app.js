@@ -166,6 +166,7 @@ function handleStoreSubmit(event){
   };
 
   console.log('this event is happening' + event);
+
   var handleStore = new Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale);
   event.target.storeName.value = null;
   event.target.minCustPerHour.value = null;
