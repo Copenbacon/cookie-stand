@@ -17,6 +17,12 @@ h2 {
   text-decoration: underline;
 }
 
+h3 {
+  font-size: 1.7em;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
 table {
   margin: auto;
   border-collapse: collapse;
@@ -25,15 +31,8 @@ table {
 th{
   text-align: center;
   font-size: 1.2em;
-  padding-left: 8px ;
-}
-
-tr {
-  border: 1px solid black;
-  font-weight: bold;
-  text-align: right;
-  font-size: 1.1em;
-  padding: 10px;
+  padding-left: 8px;
+  color: rgb(7, 0, 145);
 }
 
 td.location-name {
@@ -72,8 +71,17 @@ td {
   background-color: rgba(219, 96, 50, .9);
 }
 
+td:hover {
+  background-color: rgba(110, 30, 0, 0.9);
+}
+
+form {
+  margin: auto;
+  padding: 2%;
+}
+
 figure {
-  background: blue;
+  background-image: url('imgs/83949_0_480x360.jpg' );
   width: 50%;
   margin: auto;
   border: 1px solid blue;
@@ -85,13 +93,46 @@ img {
   height:100%;
 }
 
-p {
+img:hover {
   margin: auto;
-  padding: 1%;
-  background-color: rgba(219, 96, 50, .9);
+  background-color: rgba(0, 0, 0, 0.53);
+  border: 1px solid blue;
+  border-radius: 10px;
+}
+
+figure:hover {
+  background-color: rgba(0, 0, 0, 0.53);
+  border: 1px solid blue;
+  border-radius: 10px;
+}
+
+button {
+  margin: 0.5%;
+}
+
+div {
+  margin: auto;
+  padding-top: 1%;
   width: 40%;
+  font-weight: bold;
+  color: blue;
+  text-align: center;
+}
+
+ul {
+  background-color: rgba(219, 96, 50, .9);
   border-radius: 2px;
   font-weight: bold;
   color: blue;
   text-align: center;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  list-style-type: none;
+  padding: 1%;
+}
+
+li {
+  margin-right: 1%;
+  font-size: 1.5em;
 }

@@ -141,7 +141,7 @@ function handleStoreSubmit(event){
   avgCookiesPerSale = parseFloat(event.target.avgCookiesPerSale.value);
   console.log(avgCookiesPerSale);
 
-  
+
 
   console.log('this event is happening' + event);
   var handleStore = new Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale);
@@ -169,6 +169,8 @@ for (var i = 0; i < allStoresArray.length; i++){
   allStoresArray[i].render();
 }
 
+totalDailySalesCalc();
+totalHourlyCookieSales();
 // Event listener for Store Variables Input
 salmonCookiesInput.addEventListener('submit', handleStoreSubmit);
 
