@@ -135,15 +135,13 @@ function handleStoreSubmit(event){
     return alert('Do not leave fields empty!');
   };
 
-  // if (event.target.storeName.value !== string){
-  //   return alert('Please enter a name with letters');
-  // }
-
   locationName = event.target.storeName.value;
   minCustPerHour = parseInt(event.target.minCustPerHour.value);
   maxCustPerHour = parseInt(event.target.maxCustPerHour.value);
   avgCookiesPerSale = parseFloat(event.target.avgCookiesPerSale.value);
   console.log(avgCookiesPerSale);
+
+  
 
   console.log('this event is happening' + event);
   var handleStore = new Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale);
@@ -159,7 +157,6 @@ function handleStoreSubmit(event){
   }
   totalDailySalesCalc();
   totalHourlyCookieSales();
-
 }
 
 // function handleTotalsCalc(event){
