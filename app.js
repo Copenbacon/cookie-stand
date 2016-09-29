@@ -3,7 +3,6 @@
 var storeHours = ['6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM'];
 var allStoresArray = [];
 var salmonCookiesInput = document.getElementById('salmon-cookies-input');
-var totalsCalcInput = document.getElementById('totals-calculation');
 var tableIdEl = document.getElementById('salmon-cookies');
 var totalHourlyCookies = [];
 var totalDailySales = null;
@@ -12,12 +11,13 @@ var seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2); //eslint-disable-li
 var seattleCenter = new Store('Seattle Center', 11, 38, 3.7); //eslint-disable-line
 var capHill = new Store('Capitol Hill', 20, 38, 2.3); //eslint-disable-line
 var alki = new Store('Alki', 2, 16, 4.6); //eslint-disable-line
-var locationName = document.getElementById('storeName'); //eslint-disable-line
-var minCustPerHour = document.getElementById('minCustPerHour'); //eslint-disable-line
-var maxCustPerHour = document.getElementById('maxCustPerHour'); //eslint-disable-line
-var avgCookiesPerSale = document.getElementById('avgCookiesPerSale'); //eslint-disable-line
-
-
+var locationName = document.getElementById('storeName');
+var minCustPerHour = document.getElementById('minCustPerHour');
+var maxCustPerHour = document.getElementById('maxCustPerHour');
+var avgCookiesPerSale = document.getElementById('avgCookiesPerSale');
+var today = new Date();
+var year = today.getFullYear();
+document.getElementById('date').innerHTML = year;
 
 var totalDailySalesCalc = function(){ //eslint-disable-line
   totalDailySales = 0;
@@ -75,6 +75,7 @@ function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale){
 
   this.totalCookiesSoldPerHourMethod = function() {
     this.randCustPerHourGen();
+
     for (var i = 0; i < storeHours.length; i++){
       this.totalCookiesSoldPerHour[i] = Math.ceil(this.avgCookiesPerSale * this.randCustPerHour[i]);
       console.log('Total Cookies Sold Each Hour at ' + this.locationName + ' at ' + storeHours[i] + ': ' + this.totalCookiesSoldPerHour[i]);
@@ -84,10 +85,12 @@ function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale){
 
   this.totalDailySalesMethod = function() {
     this.totalCookiesSoldPerHourMethod();
+
     for (var i = 0; i < this.totalCookiesSoldPerHour.length; i++){
       this.totalCookiesSoldPerHour[i] = this.totalCookiesSoldPerHour[i];
       this.totalDailySales += this.totalCookiesSoldPerHour[i] ;
     }
+
     this.totalCookiesRow.push(this.totalDailySales);
     console.log('Total Cookies Sold Today at ' + this.locationName + ': ' + this.totalDailySales);
   };
@@ -98,6 +101,7 @@ function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale){
     var trEl = document.createElement('tr');
     trEl.textContent = '';
     tableIdEl.appendChild(trEl);
+
     var tdEl = document.createElement('td');
     tdEl.textContent = this.locationName;
     trEl.appendChild(tdEl);
@@ -112,7 +116,21 @@ function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale){
   allStoresArray.push(this);
 }
 
-
+// function deleteRow(location){
+//   for (var i = 0; i < allStoresArray.length; i++){
+//     if (allStoresArray[i].locationName === location){
+//       allStoresArray[i].pop();
+//     };
+//   }
+//
+//   createHeaderRow();
+//   for (var i = 0; i < allStoresArray.length; i++){
+//     allStoresArray[i].render();
+//   }
+//
+//   totalDailySalesCalc();
+//   totalHourlyCookieSales();
+// }
 
 function createHeaderRow(){
   var headerRow = document.createElement('th');
@@ -141,7 +159,11 @@ function handleStoreSubmit(event){
   avgCookiesPerSale = parseFloat(event.target.avgCookiesPerSale.value);
   console.log(avgCookiesPerSale);
 
-
+  if(maxCustPerHour < minCustPerHour){
+    event.target.minCustPerHour.value = null;
+    event.target.maxCustPerHour.value = null;
+    return alert('Minimum Customers must be less than or equal to Maximum Customers');
+  };
 
   console.log('this event is happening' + event);
   var handleStore = new Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale);
@@ -159,11 +181,6 @@ function handleStoreSubmit(event){
   totalHourlyCookieSales();
 }
 
-// function handleTotalsCalc(event){
-//   event.preventDefault();
-//   console.log('runnin?');
-// }
-
 createHeaderRow();
 for (var i = 0; i < allStoresArray.length; i++){
   allStoresArray[i].render();
@@ -171,9 +188,6 @@ for (var i = 0; i < allStoresArray.length; i++){
 
 totalDailySalesCalc();
 totalHourlyCookieSales();
+
 // Event listener for Store Variables Input
 salmonCookiesInput.addEventListener('submit', handleStoreSubmit);
-
-
-// Event listener for Calculate Totals Button
-// totalsCalcInput.addEventListener('submit', handleTotalsCalc);
