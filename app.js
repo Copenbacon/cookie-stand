@@ -163,6 +163,7 @@ function staffingSolution(){
     var tdEl = document.createElement('td');
     tdEl.textContent = allStoresArray[i].locationName;
     trEl.appendChild(tdEl);
+    tdEl.setAttribute('class', 'location-name');
 
     for (var j = 0; j < storeHours.length; j++){
       var temp = Math.ceil(allStoresArray[i].randCustPerHour[j] / 20);
@@ -201,7 +202,7 @@ function handleStoreSubmit(event){
   var handleStore = new Store(locationName, minCustPerHour, maxCustPerHour, avgCookiesPerSale);
 
   for (var i = 0; i < allStoresArray.length - 1; i++){
-    if (handleStore.locationName === allStoresArray[i].locationName){
+    if (handleStore.locationName.toLowerCase() === allStoresArray[i].locationName.toLowerCase()){
       allStoresArray[i] = handleStore;
       allStoresArray.pop();
       console.log('All Stores Array Popping');
