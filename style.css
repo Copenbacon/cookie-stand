@@ -63,6 +63,10 @@ td.location-name {
   color: rgb(7, 0, 145);
 }
 
+td.location-name::first-letter {
+  text-transform: capitalize;
+}
+
 td.total-class {
   text-align: center;
   font-weight: bolder;
