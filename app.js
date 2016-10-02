@@ -165,7 +165,10 @@ function staffingSolution(){
     trEl.appendChild(tdEl);
 
     for (var j = 0; j < storeHours.length; j++){
-      var temp = Math.ceil(allStoresArray[i].totalCookiesRow[j] / 20);
+      var temp = Math.ceil(allStoresArray[i].randCustPerHour[j] / 20);
+      if (temp <= 2){
+        temp = 2;
+      };
       allStoresArray[i].staffingArray.push(temp);
       tdEl = document.createElement('td');
       tdEl.textContent = allStoresArray[i].staffingArray[j];
